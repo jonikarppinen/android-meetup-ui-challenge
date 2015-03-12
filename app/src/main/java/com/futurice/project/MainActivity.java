@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
         GridLayout.Spec row1 = GridLayout.spec(0);
         GridLayout.Spec row2 = GridLayout.spec(1);
 
-        // COlumns
+        // Columns
         GridLayout.Spec col1 = GridLayout.spec(0);
         GridLayout.Spec col2 = GridLayout.spec(1);
 
