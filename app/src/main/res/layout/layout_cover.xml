@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:id="@+id/coverImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/album_kodaline"
+        android:scaleType="centerCrop"
+        />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        tools:background="#00FFFF"
+        android:padding="12dp"
+        >
+
+        <TextView
+            android:id="@+id/albumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            tools:text="In a Perfect World"
+            />
+
+        <TextView
+            android:id="@+id/artistTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_below="@+id/albumTextView"
+            tools:text="Kodaline"
+            android:layout_marginTop="4dp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/star_outline"
+            android:layout_alignParentRight="true"
+            android:id="@+id/imageView2"
+            />
+    </RelativeLayout>
+</LinearLayout>
