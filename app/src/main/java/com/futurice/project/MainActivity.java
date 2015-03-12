@@ -1,8 +1,10 @@
 package com.futurice.project;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.GridLayout;
@@ -48,7 +50,7 @@ public class MainActivity extends BaseActivity {
         return params;
     }
 
-    private View createCoverView(Album album) {
+    private View createCoverView(final Album album) {
         View view = LayoutInflater.from(this).inflate(R.layout.view_cover, gridLayout, false);
         TextView artistTextView = (TextView) view.findViewById(R.id.artistTextView);
         TextView albumTextView = (TextView) view.findViewById(R.id.albumTextView);
@@ -63,20 +65,27 @@ public class MainActivity extends BaseActivity {
         artistTextView.setText(album.artist);
         albumTextView.setText(album.name);
 
-        setOnClickWithAnimation(view, album);
-
-        return view;
-    }
-
-    private void setOnClickWithAnimation(View view, final Album album) {
+        // Set onclick with animation options
+        final ActivityOptions options = getAnimationOptions(coverImageView, artistTextView, albumTextView);
         view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(MainActivity.this, AlbumActivity.class);
                     intent.putExtra(AlbumActivity.KEY_ALBUM_ID, album.id);
-                    startActivity(intent);
+                    startActivity(intent, options.toBundle());
                 }
             }
+        );
+
+        return view;
+    }
+
+    @SuppressWarnings("unchecked")
+    private ActivityOptions getAnimationOptions(ImageView coverImage, TextView artist, TextView album) {
+        return ActivityOptions.makeSceneTransitionAnimation(this,
+                new Pair<View, String>(coverImage, AlbumActivity.VIEW_NAME_IMAGE)
+//                new Pair<View, String>(artist, AlbumActivity.VIEW_NAME_ARTIST),
+//                new Pair<View, String>(album, AlbumActivity.VIEW_NAME_ALBUM)
         );
     }
 

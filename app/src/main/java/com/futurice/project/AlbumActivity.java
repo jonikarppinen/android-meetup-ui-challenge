@@ -13,7 +13,9 @@ import static com.futurice.project.AndroidUtils.getVibrantColor;
 public class AlbumActivity extends BaseActivity {
 
     public static final String KEY_ALBUM_ID = "id";
-    // public static final String VIEW_NAME_IMAGE = "detail:header:image";
+    public static final String VIEW_NAME_IMAGE = "album:cover";
+//    public static final String VIEW_NAME_ALBUM = "album:name";
+//    public static final String VIEW_NAME_ARTIST = "album:artist";
 
     @InjectView(R.id.cover_image) ImageView coverImage;
     @InjectView(R.id.artist) TextView artistName;
@@ -26,7 +28,9 @@ public class AlbumActivity extends BaseActivity {
         setContentView(R.layout.activity_album);
         ButterKnife.inject(this);
 
-        // ViewCompat.setTransitionName(coverImage, VIEW_NAME_IMAGE);
+        coverImage.setTransitionName(VIEW_NAME_IMAGE);
+//        albumName.setTransitionName(VIEW_NAME_ALBUM);
+//        artistName.setTransitionName(VIEW_NAME_ARTIST);
 
         Album album = Album.getTestAlbumById((getIntent().getIntExtra(KEY_ALBUM_ID, -1)));
 
