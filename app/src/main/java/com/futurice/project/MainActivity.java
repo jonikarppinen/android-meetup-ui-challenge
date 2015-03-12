@@ -3,6 +3,7 @@ package com.futurice.project;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,10 +22,37 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         gridLayout = (GridLayout) findViewById(R.id.gridLayout);
-        gridLayout.addView(createCoverView("Kodaline", "In a Perfect World", R.drawable.album_kodaline));
-        gridLayout.addView(createCoverView("Fitz & The Tantrum", "More than Just a Dream", R.drawable.album_fitz));
-        gridLayout.addView(createCoverView("Jamie Lidell", "Jamie Lidell", R.drawable.album_jamie));
-        gridLayout.addView(createCoverView("Yuna", "Nocturnal", R.drawable.album_yuna));
+
+        // Rows
+        GridLayout.Spec row1 = GridLayout.spec(0);
+        GridLayout.Spec row2 = GridLayout.spec(1);
+
+        // COlumns
+        GridLayout.Spec col1 = GridLayout.spec(0);
+        GridLayout.Spec col2 = GridLayout.spec(1);
+
+        View first = createCoverView("Kodaline", "In a Perfect World", R.drawable.album_kodaline);
+        View second = createCoverView("Fitz & The Tantrum", "More than Just a Dream", R.drawable.album_fitz);
+        View third = createCoverView("Jamie Lidell", "Jamie Lidell", R.drawable.album_jamie);
+        View fourth = createCoverView("Yuna", "Nocturnal", R.drawable.album_yuna);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int boxWidth = metrics.widthPixels / 2;
+        int boxHeight = (metrics.heightPixels - 200) / 2;
+
+        gridLayout.addView(first, gridParams(row1, col1, boxWidth, boxHeight));
+        gridLayout.addView(second, gridParams(row1, col2, boxWidth, boxHeight));
+        gridLayout.addView(third, gridParams(row2, col1, boxWidth, boxHeight));
+        gridLayout.addView(fourth, gridParams(row2, col2, boxWidth, boxHeight));
+
+    }
+
+    private GridLayout.LayoutParams gridParams(GridLayout.Spec row1, GridLayout.Spec col1, int width, int height) {
+        GridLayout.LayoutParams params = new GridLayout.LayoutParams(row1, col1);
+        params.width = width;
+        params.height = height;
+        return params;
     }
 
     private View createCoverView(String artist, String album, int coverResId) {
@@ -32,9 +60,11 @@ public class MainActivity extends Activity {
         TextView artistTextView = (TextView) view.findViewById(R.id.artistTextView);
         TextView albumTextView = (TextView) view.findViewById(R.id.albumTextView);
         ImageView coverImageView = (ImageView) view.findViewById(R.id.coverImageView);
+
         artistTextView.setText(artist);
         albumTextView.setText(album);
         coverImageView.setImageResource(coverResId);
+
         return view;
     }
 
