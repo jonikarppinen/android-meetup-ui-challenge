@@ -23,12 +23,24 @@
         android:layout_weight="1"
         >
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/star_outline"
+            android:layout_alignParentRight="true"
+            android:id="@+id/imageView2"
+            />
+
         <TextView
             android:id="@+id/albumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             tools:text="In a Perfect World"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/imageView2"
             />
 
         <TextView
@@ -37,16 +49,12 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_below="@+id/albumTextView"
+            android:ellipsize="end"
+            android:singleLine="true"
             tools:text="Kodaline"
             android:layout_marginTop="4dp"
-            />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/star_outline"
-            android:layout_alignParentRight="true"
-            android:id="@+id/imageView2"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/imageView2"
             />
     </RelativeLayout>
 </LinearLayout>

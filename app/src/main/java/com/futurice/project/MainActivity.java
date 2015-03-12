@@ -78,7 +78,8 @@ public class MainActivity extends Activity {
         coverImageView.setImageResource(coverResId);
         // Set info section
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), coverResId);
-        int vibrantColor = Palette.generate(bmp).getLightMutedColor(getTitleColor());
+        Palette palette = Palette.generate(bmp);
+        int vibrantColor = palette.getVibrantColor(getTitleColor());
         infoSection.setBackgroundColor(vibrantColor);
         // Set texts
         artistTextView.setText(artist);
