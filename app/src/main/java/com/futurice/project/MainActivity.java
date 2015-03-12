@@ -1,8 +1,11 @@
 package com.futurice.project;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.graphics.Palette;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -20,6 +24,15 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        GridLayout.Spec rowSpec0 = GridLayout.spec(0, 1);
+        GridLayout.Spec colSpec0 = GridLayout.spec(0, 1);
+        GridLayout.Spec rowSpec1 = GridLayout.spec(1, 1);
+        GridLayout.Spec colSpec1 = GridLayout.spec(1, 1);
+        GridLayout.LayoutParams lp0 = new GridLayout.LayoutParams(rowSpec0, colSpec0);
+        GridLayout.LayoutParams lp1 = new GridLayout.LayoutParams(rowSpec0, colSpec1);
+        GridLayout.LayoutParams lp2 = new GridLayout.LayoutParams(rowSpec1, colSpec0);
+        GridLayout.LayoutParams lp3 = new GridLayout.LayoutParams(rowSpec1, colSpec1);
 
         gridLayout = (GridLayout) findViewById(R.id.gridLayout);
 
@@ -60,11 +73,16 @@ public class MainActivity extends Activity {
         TextView artistTextView = (TextView) view.findViewById(R.id.artistTextView);
         TextView albumTextView = (TextView) view.findViewById(R.id.albumTextView);
         ImageView coverImageView = (ImageView) view.findViewById(R.id.coverImageView);
-
+        View infoSection = view.findViewById(R.id.infoSection);
+        // Set coverImageView
+        coverImageView.setImageResource(coverResId);
+        // Set info section
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(), coverResId);
+        int vibrantColor = Palette.generate(bmp).getLightMutedColor(getTitleColor());
+        infoSection.setBackgroundColor(vibrantColor);
+        // Set texts
         artistTextView.setText(artist);
         albumTextView.setText(album);
-        coverImageView.setImageResource(coverResId);
-
         return view;
     }
 
